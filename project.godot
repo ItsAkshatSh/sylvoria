@@ -10,7 +10,7 @@ config_version=5
 
 [application]
 
-config/name="Sylvoria"
+config/name="AARPG Tutorial"
 run/main_scene="res://title_scene/title_scene.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
 boot_splash/show_image=false
@@ -34,6 +34,10 @@ window/size/viewport_height=270
 window/size/window_width_override=1440
 window/size/window_height_override=810
 window/stretch/mode="viewport"
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/juice_my_editor/plugin.cfg")
 
 [gui]
 

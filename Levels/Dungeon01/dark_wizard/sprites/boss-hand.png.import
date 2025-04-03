@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://djv71txg5q3sk"
-path="res://.godot/imported/Michael Games.png-bb5d11a90c0ef119bc0b7c76bfdfcfb3.ctex"
+uid="uid://cxawdw6nbh356"
+path="res://.godot/imported/boss-hand.png-ed5076e54a37ce328de8c01bf27299fb.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://title_scene/sprites/Michael Games.png"
-dest_files=["res://.godot/imported/Michael Games.png-bb5d11a90c0ef119bc0b7c76bfdfcfb3.ctex"]
+source_file="res://Levels/Dungeon01/dark_wizard/sprites/boss-hand.png"
+dest_files=["res://.godot/imported/boss-hand.png-ed5076e54a37ce328de8c01bf27299fb.ctex"]
 
 [params]
 

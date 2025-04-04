@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=3 uid="uid://dgdqc0v1oicd5"]
 
 [ext_resource type="Texture2D" uid="uid://d01qv0qqg01ba" path="res://Tile Maps/Sprites/Grass-01.png" id="1_xkblo"]
-[ext_resource type="Script" path="res://Tile Maps/level_tile_map.gd" id="2_e2n1y"]
+[ext_resource type="Script" uid="uid://cc2od82lodfey" path="res://Tile Maps/level_tile_map.gd" id="2_e2n1y"]
 [ext_resource type="Texture2D" uid="uid://fwby631k8pda" path="res://Tile Maps/Sprites/dungeon_entrance.png" id="2_x1j5c"]
 [ext_resource type="Texture2D" uid="uid://bgf4lmgm5bh3x" path="res://Tile Maps/tf_jungle_tileset.png" id="3_bk7rg"]
 
@@ -584,8 +584,11 @@ texture = ExtResource("3_bk7rg")
 13:7/0 = 0
 14:7/0 = 0
 1:8/0 = 0
+1:8/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 2:8/0 = 0
+2:8/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 3:8/0 = 0
+3:8/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 4:8/0 = 0
 5:8/0 = 0
 6:8/0 = 0
@@ -597,8 +600,11 @@ texture = ExtResource("3_bk7rg")
 13:8/0 = 0
 14:8/0 = 0
 1:9/0 = 0
+1:9/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 2:9/0 = 0
+2:9/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 3:9/0 = 0
+3:9/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 4:9/0 = 0
 5:9/0 = 0
 6:9/0 = 0
@@ -736,10 +742,13 @@ texture = ExtResource("3_bk7rg")
 2:20/0 = 0
 1:10/size_in_atlas = Vector2i(1, 3)
 1:10/0 = 0
+1:10/0/physics_layer_0/polygon_0/points = PackedVector2Array(-7.6014, -23.6881, 7.60139, -24.0416, 7.95495, 23.6881, -8.30851, 24.0416)
 2:10/size_in_atlas = Vector2i(1, 3)
 2:10/0 = 0
+2:10/0/physics_layer_0/polygon_0/points = PackedVector2Array(-7.6014, -23.6881, 7.60139, -24.0416, 7.95495, 23.6881, -8.30851, 24.0416)
 3:10/size_in_atlas = Vector2i(1, 3)
 3:10/0 = 0
+3:10/0/physics_layer_0/polygon_0/points = PackedVector2Array(-7.6014, -23.6881, 7.60139, -24.0416, 7.95495, 23.6881, -8.30851, 24.0416)
 15:5/size_in_atlas = Vector2i(5, 6)
 15:5/0 = 0
 3:13/size_in_atlas = Vector2i(2, 2)

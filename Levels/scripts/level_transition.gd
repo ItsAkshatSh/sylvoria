@@ -1,6 +1,8 @@
 @tool
 class_name LevelTransition extends Area2D
 
+signal entered_from_here
+
 enum SIDE { LEFT, RIGHT, TOP, BOTTOM }
 
 @export_file( "*.tscn" ) var level
@@ -38,6 +40,13 @@ func _ready() -> void:
 	
 	await LevelManager.level_loaded
 	
+	# Some extra physics frame awaits will avoid issues related to frame rate
+	# & physics process frame rate not syncing up... we had a bug where no matter
+	# what we did the collision would still sometimes happen at the players
+	# OLD position after loading on PC's running the game at 120 or 144fps
+	await get_tree().physics_frame
+	await get_tree().physics_frame
+	
 	monitoring = true
 	body_entered.connect( _player_entered )
 	
@@ -54,6 +63,7 @@ func _place_player() -> void:
 	if name != LevelManager.target_transition:
 		return
 	PlayerManager.set_player_position( global_position + LevelManager.position_offset )
+	entered_from_here.emit()
 
 
 func get_offset() -> Vector2:

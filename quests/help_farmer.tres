@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="Quest" load_steps=3 format=3 uid="uid://dy2ovaiv236mv"]
+
+[ext_resource type="Script" uid="uid://b73hijmin5dn2" path="res://quests/scripts/quest_reward_item.gd" id="1_faihy"]
+[ext_resource type="Script" uid="uid://ej3xbi7xbvg1" path="res://quests/scripts/quest_resource.gd" id="2_mb4f0"]
+
+[resource]
+script = ExtResource("2_mb4f0")
+title = "Help Pero"
+description = "Pero has tasked the hero to help him dfeat the dark wizard, who is destroying his land"
+steps = Array[String]([])
+reward_xp = 0
+reward_items = Array[ExtResource("1_faihy")]([])
+metadata/_custom_type_script = "uid://ej3xbi7xbvg1"

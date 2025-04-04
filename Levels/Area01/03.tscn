@@ -1,11 +1,40 @@
-[gd_scene load_steps=7 format=4 uid="uid://di637arhv02o2"]
+[gd_scene load_steps=22 format=4 uid="uid://di637arhv02o2"]
 
-[ext_resource type="Script" path="res://Levels/scripts/level.gd" id="1_bspbj"]
+[ext_resource type="Script" uid="uid://d2eyblbal755o" path="res://Levels/scripts/level.gd" id="1_bspbj"]
 [ext_resource type="AudioStream" uid="uid://io7jxqk648xa" path="res://Levels/music/example_music_01.ogg" id="2_wavkr"]
 [ext_resource type="PackedScene" uid="uid://cq32mohonpsw3" path="res://Tile Maps/grass-tiles-01.tscn" id="3_hd7c7"]
 [ext_resource type="PackedScene" uid="uid://dr4blo7ya448q" path="res://Levels/player_spawn.tscn" id="4_j7hqw"]
 [ext_resource type="PackedScene" uid="uid://b7x3cvq6i0qvf" path="res://Enemies/Slime/slime.tscn" id="5_6j82e"]
 [ext_resource type="PackedScene" uid="uid://vlpiuopcomwi" path="res://Levels/level_transition.tscn" id="5_40pm8"]
+[ext_resource type="PackedScene" uid="uid://bi8crg3nv50qw" path="res://npc/npc.tscn" id="7_ut76y"]
+[ext_resource type="Resource" uid="uid://bqfxxks18ou8u" path="res://npc/00_npcs/npc_02.tres" id="8_khh2a"]
+[ext_resource type="PackedScene" uid="uid://dpenv0euqqlkg" path="res://npc/npc_behavior_patrol.tscn" id="9_ggmmm"]
+[ext_resource type="PackedScene" uid="uid://dyhn3j7qk4dqw" path="res://npc/patrol_location.tscn" id="10_j7ccu"]
+[ext_resource type="PackedScene" uid="uid://cwby8egx8vwx2" path="res://quests/utility_nodes/quest_activated_switch.tscn" id="11_au883"]
+[ext_resource type="Resource" uid="uid://dy2ovaiv236mv" path="res://quests/help_farmer.tres" id="12_8f53j"]
+[ext_resource type="PackedScene" uid="uid://b22o8rtjyby8c" path="res://Interactables/dialog/dialog_interaction.tscn" id="13_okoj5"]
+[ext_resource type="Script" uid="uid://7qrcj0xrfdwc" path="res://Interactables/dialog/scripts/dialog_text.gd" id="14_wcypq"]
+[ext_resource type="Resource" uid="uid://2dc6qp3pkekj" path="res://npc/00_npcs/npc_03.tres" id="15_awonj"]
+[ext_resource type="Script" uid="uid://bhoxv42n8rdsq" path="res://Interactables/dialog/scripts/dialog_choice.gd" id="16_1vblc"]
+[ext_resource type="Script" uid="uid://c80ln4eok2stu" path="res://Interactables/dialog/scripts/dialog_branch.gd" id="17_vmfkt"]
+[ext_resource type="PackedScene" uid="uid://b523kljtfiar7" path="res://quests/utility_nodes/quest_advance_trigger.tscn" id="18_d4gbo"]
+[ext_resource type="Script" uid="uid://cj17f33sisctc" path="res://quests/utility_nodes/quest_activated_switch.gd" id="19_niigt"]
+[ext_resource type="Resource" uid="uid://cvnr3a38pmudn" path="res://quests/recover_lost_flute.tres" id="20_81g4d"]
+
+[sub_resource type="GDScript" id="GDScript_o512p"]
+script/source = "extends Node
+
+@onready var quest_advance_trigger: QuestAdvanceTrigger = $\"..\"
+
+
+func _ready() -> void:
+	quest_advance_trigger.advanced.connect( quest_complete )
+
+
+func quest_complete() -> void:
+	PlayerManager.INVENTORY_DATA.use_item( load(\"res://Items/magical_flute.tres\") )
+	pass
+"
 
 [node name="03" type="Node2D"]
 y_sort_enabled = true
@@ -13,7 +42,7 @@ script = ExtResource("1_bspbj")
 music = ExtResource("2_wavkr")
 
 [node name="grass-tiles-01" parent="." instance=ExtResource("3_hd7c7")]
-tile_map_data = PackedByteArray("AAAAAP//AAACAAUAAAAAAAAAAAACAAYAAAAAAAEAAAANAAQAAAAAAAIAAAANAAYAAAAAAAMAAAANAAcAAAAAAAQAAAAAAAAAAAAAAAUAAAAAAAAAAAAAAAYAAAABAAIAAAAAAAcAAAANAAQAAAAAAAgAAAANAAUAAAABAP//AAADAAUAAAABAAAAAAADAAYAAAABAAEAAAAOAAQAAAABAAIAAAAOAAYAAAABAAMAAAAOAAcAAAABAAQAAAABAAAAAAABAAUAAAABAAAAAAABAAYAAAABAAIAAAABAAcAAAAOAAQAAAABAAgAAAAOAAUAAAACAP//AAAEAAUAAAACAAAAAAAEAAYAAAACAAEAAAACAAAAAAACAAIAAAACAAAAAAACAAMAAAACAAAAAAACAAQAAAACAAAAAAACAAUAAAACAAAAAAACAAYAAAACAAAAAAACAAcAAAACAAAAAAACAAgAAAAKAAQAAAADAP//AAACAAUAAAADAAAAAAACAAYAAAADAAEAAAAAAAAAAAADAAIAAAAAAAAAAAADAAMAAAAAAAAAAAADAAQAAAAAAAAAAAADAAUAAAAAAAAAAAADAAYAAAAAAAAAAAADAAcAAAAAAAAAAAADAAgAAAALAAQAAAAEAP//AAADAAUAAAAEAAAAAAADAAYAAAAEAAEAAAABAAAAAAAEAAIAAAABAAAAAAAEAAMAAAABAAAAAAAEAAQAAAABAAAAAAAEAAUAAAACAAEAAAAEAAYAAAABAAAAAAAEAAcAAAABAAAAAAAEAAgAAAAMAAQAAAAFAP//AAAEAAUAAAAFAAAAAAAEAAYAAAAFAAEAAAACAAAAAAAFAAIAAAACAAAAAAAFAAMAAAACAAAAAAAFAAQAAAACAAAAAAAFAAUAAAACAAAAAAAFAAYAAAACAAAAAAAFAAcAAAACAAAAAAAFAAgAAAANAAQAAAAGAP//AAACAAUAAAAGAAAAAAACAAYAAAAGAAEAAAAAAAAAAAAGAAIAAAAAAAAAAAAGAAMAAAAAAAAAAAAGAAQAAAAAAAAAAAAGAAUAAAAAAAAAAAAGAAYAAAAAAAAAAAAGAAcAAAAAAAAAAAAGAAgAAAALAAQAAAAHAP//AAADAAUAAAAHAAAAAAADAAYAAAAHAAEAAAABAAAAAAAHAAIAAAABAAAAAAAHAAMAAAABAAAAAAAHAAQAAAABAAAAAAAHAAUAAAABAAAAAAAHAAYAAAABAAAAAAAHAAcAAAABAAAAAAAHAAgAAAAMAAQAAAAIAP//AAAEAAUAAAAIAAAAAAAEAAYAAAAIAAEAAAACAAAAAAAIAAIAAAACAAAAAAAIAAMAAAACAAAAAAAIAAQAAAACAAAAAAAIAAUAAAACAAAAAAAIAAYAAAACAAAAAAAIAAcAAAACAAAAAAAIAAgAAAANAAQAAAAJAP//AAACAAUAAAAJAAAAAAACAAYAAAAJAAEAAAAAAAAAAAAJAAIAAAAAAAAAAAAJAAMAAAAAAAAAAAAJAAQAAAAAAAAAAAAJAAUAAAAAAAAAAAAJAAYAAAAAAAAAAAAJAAcAAAAAAAAAAAAJAAgAAAALAAQAAAAKAP//AAADAAUAAAAKAAAAAAADAAYAAAAKAAEAAAABAAAAAAAKAAIAAAABAAAAAAAKAAMAAAABAAAAAAAKAAQAAAABAAAAAAAKAAUAAAABAAAAAAAKAAYAAAABAAAAAAAKAAcAAAABAAAAAAAKAAgAAAAMAAQAAAALAP//AAAEAAUAAAALAAAAAAAEAAYAAAALAAEAAAACAAAAAAALAAIAAAACAAAAAAALAAMAAAACAAAAAAALAAQAAAACAAAAAAALAAUAAAACAAAAAAALAAYAAAACAAAAAAALAAcAAAACAAAAAAALAAgAAAANAAQAAAAMAP//AAACAAUAAAAMAAAAAAACAAYAAAAMAAEAAAAAAAAAAAAMAAIAAAAAAAAAAAAMAAMAAAAAAAAAAAAMAAQAAAAAAAAAAAAMAAUAAAAAAAAAAAAMAAYAAAAAAAAAAAAMAAcAAAAAAAAAAAAMAAgAAAALAAQAAAANAP//AAADAAUAAAANAAAAAAADAAYAAAANAAEAAAABAAAAAAANAAIAAAABAAAAAAANAAMAAAABAAAAAAANAAQAAAABAAAAAAANAAUAAAABAAAAAAANAAYAAAABAAAAAAANAAcAAAABAAAAAAANAAgAAAAMAAQAAAAOAP//AAAEAAUAAAAOAAAAAAAEAAYAAAAOAAEAAAACAAAAAAAOAAIAAAACAAAAAAAOAAMAAAACAAAAAAAOAAQAAAACAAAAAAAOAAUAAAACAAAAAAAOAAYAAAACAAAAAAAOAAcAAAACAAAAAAAOAAgAAAANAAQAAAAPAP//AAACAAUAAAAPAAAAAAACAAYAAAAPAAEAAAAAAAAAAAAPAAIAAAAAAAAAAAAPAAMAAAAAAAAAAAAPAAQAAAAAAAAAAAAPAAUAAAAAAAAAAAAPAAYAAAAAAAAAAAAPAAcAAAAAAAAAAAAPAAgAAAALAAQAAAAQAP//AAADAAUAAAAQAAAAAAADAAYAAAAQAAEAAAAKAAQAAAAQAAIAAAAKAAUAAAAQAAMAAAAKAAUAAAAQAAQAAAAKAAUAAAAQAAUAAAAKAAUAAAAQAAYAAAAKAAYAAAAQAAcAAAAKAAcAAAAQAAgAAAAMAAQAAAA=")
+tile_map_data = PackedByteArray("AAAAAP//BQAFAAQAAAAAAAAABQABAAQAAAAAAAEAAAANAAQAAAAAAAIAAAANAAYAAAAAAAMAAAANAAcAAAAAAAQAAAAMAAAAAAAAAAUAAAAMAAEAAAAAAAYAAAAMAAMAAAAAAAcAAAANAAQAAAAAAAgAAAANAAUAAAABAP//BQAFAAQAAAABAAAABQABAAQAAAABAAEAAAAOAAQAAAABAAIAAAAOAAYAAAABAAMAAAAOAAcAAAABAAQAAAAOAAAAAAABAAUAAAAKAAIAAAABAAYAAAAPAAMAAAABAAcAAAAOAAQAAAABAAgAAAAOAAUAAAACAP//BQAFAAQAAAACAAAABQABAAQAAAACAAEAAAACAAAAAAACAAIAAAACAAAAAAACAAMAAAACAAAAAAACAAQAAAAOAAAAAAACAAUAAAANAAMAAAACAAYAAAACAAAAAAACAAcAAAACAAAAAAACAAgAAAAKAAQAAAADAP//BQAFAAQAAAADAAAABQABAAQAAAADAAEAAAAAAAAAAAADAAIAAAAAAAAAAAADAAMAAAAAAAAAAAADAAQAAAAOAAAAAAADAAUAAAANAAMAAAADAAYAAAAAAAAAAAADAAcAAAAAAAAAAAADAAgAAAALAAQAAAAEAP//BQAFAAQAAAAEAAAABQABAAQAAAAEAAEAAAABAAAAAAAEAAIAAAABAAAAAAAEAAMAAAAMAAAAAAAEAAQAAAAJAAEAAAAEAAUAAAANAAMAAAAEAAYAAAABAAAAAAAEAAcAAAABAAAAAAAEAAgAAAAMAAQAAAAFAP//BQAFAAQAAAAFAAAABQABAAQAAAAFAAEAAAACAAAAAAAFAAIAAAAMAAAAAAAFAAMAAAANAAEAAAAFAAQAAAAPAAIAAAAFAAUAAAAPAAMAAAAFAAYAAAACAAAAAAAFAAcAAAACAAAAAAAFAAgAAAANAAQAAAAGAP//BQAFAAQAAAAGAAAABQABAAQAAAAGAAEAAAAAAAAAAAAGAAIAAAAOAAAAAAAGAAMAAAANAAMAAAAGAAQAAAAAAAAAAAAGAAUAAAAAAAAAAAAGAAYAAAAAAAAAAAAGAAcAAAAAAAAAAAAGAAgAAAALAAQAAAAHAP//BQAFAAQAAAAHAAAABQABAAQAAAAHAAEAAAABAAAAAAAHAAIAAAAOAAAAAAAHAAMAAAANAAMAAAAHAAQAAAABAAAAAAAHAAUAAAABAAAAAAAHAAYAAAABAAAAAAAHAAcAAAABAAAAAAAHAAgAAAAMAAQAAAAIAP//BQAFAAQAAAAIAAAABQABAAQAAAAIAAEAAAACAAAAAAAIAAIAAAAOAAAAAAAIAAMAAAANAAMAAAAIAAQAAAACAAAAAAAIAAUAAAACAAAAAAAIAAYAAAACAAAAAAAIAAcAAAACAAAAAAAIAAgAAAANAAQAAAAJAP//BQAFAAQAAAAJAAAABQABAAQAAAAJAAEAAAAAAAAAAAAJAAIAAAAOAAAAAAAJAAMAAAANAAMAAAAJAAQAAAAAAAAAAAAJAAUAAAAAAAAAAAAJAAYAAAAAAAAAAAAJAAcAAAAAAAAAAAAJAAgAAAALAAQAAAAKAP//BQAFAAQAAAAKAAAABQABAAQAAAAKAAEAAAABAAAAAAAKAAIAAAAOAAAAAAAKAAMAAAANAAMAAAAKAAQAAAABAAAAAAAKAAUAAAABAAAAAAAKAAYAAAABAAAAAAAKAAcAAAABAAAAAAAKAAgAAAAMAAQAAAALAP//BQAFAAQAAAALAAAABQABAAQAAAALAAEAAAACAAAAAAALAAIAAAAOAAAAAAALAAMAAAANAAMAAAALAAQAAAACAAAAAAALAAUAAAACAAAAAAALAAYAAAACAAAAAAALAAcAAAACAAAAAAALAAgAAAANAAQAAAAMAP//BQAFAAQAAAAMAAAABQABAAQAAAAMAAEAAAAAAAAAAAAMAAIAAAAOAAAAAAAMAAMAAAANAAMAAAAMAAQAAAAAAAAAAAAMAAUAAAAAAAAAAAAMAAYAAAAAAAAAAAAMAAgAAAALAAQAAAANAP//BQAFAAQAAAANAAAABQABAAQAAAANAAEAAAAMAAAAAAANAAIAAAAJAAEAAAANAAMAAAANAAMAAAANAAQAAAABAAAAAAANAAUAAAABAAAAAAANAAYAAAABAAAAAAANAAcAAAABAAAAAAANAAgAAAAMAAQAAAAOAP//BQAFAAQAAAAOAAAABQABAAQAAAAOAAEAAAAOAAAAAAAOAAIAAAANAAIAAAAOAAMAAAANAAMAAAAOAAQAAAACAAAAAAAOAAUAAAACAAAAAAAOAAYAAAACAAAAAAAOAAcAAAACAAAAAAAOAAgAAAANAAQAAAAPAP//BQAFAAQAAAAPAAAABQABAAQAAAAPAAEAAAAOAAAAAAAPAAIAAAANAAIAAAAPAAMAAAANAAMAAAAPAAQAAAAAAAAAAAAPAAUAAAAAAAAAAAAPAAYAAAAAAAAAAAAPAAcAAAAAAAAAAAAPAAgAAAALAAQAAAAQAP//BQAFAAQAAAAQAAAABQABAAQAAAAQAAQAAAAKAAUAAAAQAAUAAAAKAAUAAAAQAAYAAAAKAAYAAAAQAAcAAAAKAAcAAAAQAAgAAAAMAAQAAAAQAAIAAAAPAAIAAAAQAAMAAAAPAAMAAAAQAAEAAAAPAAAAAAAMAAcAAAAAAAAAAAA=")
 
 [node name="PlayerSpawn" parent="." instance=ExtResource("4_j7hqw")]
 position = Vector2(303, 163)
@@ -28,7 +57,152 @@ position = Vector2(267, 245)
 position = Vector2(181, 76)
 
 [node name="LevelTransition" parent="." instance=ExtResource("5_40pm8")]
-position = Vector2(0, 176)
+position = Vector2(31, 177)
 level = "res://Levels/Area01/01.tscn"
 target_transition_area = "LevelTransition2"
 size = 3
+
+[node name="LevelTransition2" parent="." instance=ExtResource("5_40pm8")]
+position = Vector2(513, 78)
+level = "uid://daqdlsdj76no7"
+size = 3
+side = 1
+
+[node name="NPC_NERO2" parent="." instance=ExtResource("7_ut76y")]
+position = Vector2(168, 156)
+npc_resource = ExtResource("8_khh2a")
+
+[node name="NpcBehaviorPatrol" parent="NPC_NERO2" instance=ExtResource("9_ggmmm")]
+
+[node name="PatrolLocation" parent="NPC_NERO2/NpcBehaviorPatrol" instance=ExtResource("10_j7ccu")]
+modulate = Color(1, 0, 0, 1)
+position = Vector2(67.059, -12)
+
+[node name="PatrolLocation2" parent="NPC_NERO2/NpcBehaviorPatrol" instance=ExtResource("10_j7ccu")]
+modulate = Color(1, 1, 0, 1)
+position = Vector2(26, 76)
+
+[node name="PatrolLocation3" parent="NPC_NERO2/NpcBehaviorPatrol" instance=ExtResource("10_j7ccu")]
+modulate = Color(0, 1, 0, 1)
+position = Vector2(-68, 29)
+wait_time = 3.0
+
+[node name="PatrolLocation4" parent="NPC_NERO2/NpcBehaviorPatrol" instance=ExtResource("10_j7ccu")]
+modulate = Color(0, 1, 1, 1)
+position = Vector2(-66, -53)
+
+[node name="QuestActivatedSwitch" parent="NPC_NERO2" instance=ExtResource("11_au883")]
+remove_when_activated = true
+react_to_global_signal = true
+linked_quest = ExtResource("12_8f53j")
+settings_summary = "UPDATE QUEST:
+Quest: Help Pero
+Checking if player has quest"
+
+[node name="DialogInteraction" parent="NPC_NERO2/QuestActivatedSwitch" instance=ExtResource("13_okoj5")]
+
+[node name="DialogText" type="Node" parent="NPC_NERO2/QuestActivatedSwitch/DialogInteraction"]
+script = ExtResource("14_wcypq")
+text = "Haro! I needo helpo! Disa slimos are destroya my lando! Can yu pliso helpo?"
+npc_info = ExtResource("15_awonj")
+
+[node name="DialogChoice" type="Node" parent="NPC_NERO2/QuestActivatedSwitch/DialogInteraction"]
+script = ExtResource("16_1vblc")
+npc_info = ExtResource("15_awonj")
+
+[node name="DialogBranch" type="Node" parent="NPC_NERO2/QuestActivatedSwitch/DialogInteraction/DialogChoice"]
+script = ExtResource("17_vmfkt")
+text = "Yu cano conto on ita!"
+npc_info = ExtResource("15_awonj")
+
+[node name="QuestAdvanceTrigger" parent="NPC_NERO2/QuestActivatedSwitch/DialogInteraction/DialogChoice/DialogBranch" instance=ExtResource("18_d4gbo")]
+position = Vector2(331, 171)
+signal_name = "selected"
+linked_quest = ExtResource("12_8f53j")
+settings_summary = "UPDATE QUEST:
+Quest: Helping Pero
+Step: 0 - N/A
+Complete: false"
+
+[node name="DialogText" type="Node" parent="NPC_NERO2/QuestActivatedSwitch/DialogInteraction/DialogChoice/DialogBranch"]
+script = ExtResource("14_wcypq")
+text = "Diso hapeno becausa da darko wizardo in da donjon, yu needo defeto himo to stopo da slimos!"
+npc_info = ExtResource("8_khh2a")
+
+[node name="DialogText2" type="Node" parent="NPC_NERO2/QuestActivatedSwitch/DialogInteraction/DialogChoice/DialogBranch"]
+script = ExtResource("14_wcypq")
+text = "He really powerfu, so ifa I were yu, I wouldo packo da necesari things!"
+npc_info = ExtResource("8_khh2a")
+
+[node name="DialogBranch2" type="Node" parent="NPC_NERO2/QuestActivatedSwitch/DialogInteraction/DialogChoice"]
+script = ExtResource("17_vmfkt")
+text = "Sori, cano helpo!"
+npc_info = ExtResource("8_khh2a")
+
+[node name="DialogText" type="Node" parent="NPC_NERO2/QuestActivatedSwitch/DialogInteraction/DialogChoice/DialogBranch2"]
+script = ExtResource("14_wcypq")
+text = "Alrighto then, buto ifa yu changeo mindo, yu cano helpo me."
+npc_info = ExtResource("8_khh2a")
+
+[node name="QuestActivatedSwitch3" type="Node2D" parent="NPC_NERO2"]
+script = ExtResource("19_niigt")
+check_type = 3
+remove_when_activated = true
+react_to_global_signal = true
+linked_quest = ExtResource("12_8f53j")
+quest_complete = true
+settings_summary = "UPDATE QUEST:
+Quest: Help Pero
+Checking if quest is complete"
+
+[node name="QuestActivatedSwitch2" parent="NPC_NERO2/QuestActivatedSwitch3" instance=ExtResource("11_au883")]
+position = Vector2(0, -18)
+react_to_global_signal = true
+linked_quest = ExtResource("20_81g4d")
+settings_summary = "UPDATE QUEST:
+Quest: Help Pero
+Checking if player has quest"
+
+[node name="QuestActivatedSwitch2" parent="NPC_NERO2/QuestActivatedSwitch3/QuestActivatedSwitch2" instance=ExtResource("11_au883")]
+check_type = 2
+remove_when_activated = true
+react_to_global_signal = true
+linked_quest = ExtResource("20_81g4d")
+quest_step = 3
+settings_summary = "UPDATE QUEST:
+Quest: Recover Lost Magical Flute
+Check if player is on step: return to Pero"
+
+[node name="DialogInteraction" parent="NPC_NERO2/QuestActivatedSwitch3/QuestActivatedSwitch2/QuestActivatedSwitch2" instance=ExtResource("13_okoj5")]
+
+[node name="DialogText" type="Node" parent="NPC_NERO2/QuestActivatedSwitch3/QuestActivatedSwitch2/QuestActivatedSwitch2/DialogInteraction"]
+script = ExtResource("14_wcypq")
+text = " Tanku, Haro! I amo greatli in yu debto!"
+npc_info = ExtResource("8_khh2a")
+
+[node name="QuestActivatedSwitch" parent="NPC_NERO2/QuestActivatedSwitch3/QuestActivatedSwitch2" instance=ExtResource("11_au883")]
+check_type = 2
+react_to_global_signal = true
+linked_quest = ExtResource("12_8f53j")
+settings_summary = "UPDATE QUEST:
+Quest: Help Pero
+Check if player is on step: N/A"
+
+[node name="DialogInteraction2" parent="NPC_NERO2/QuestActivatedSwitch3/QuestActivatedSwitch2/QuestActivatedSwitch" instance=ExtResource("13_okoj5")]
+
+[node name="DialogText" type="Node" parent="NPC_NERO2/QuestActivatedSwitch3/QuestActivatedSwitch2/QuestActivatedSwitch/DialogInteraction2"]
+script = ExtResource("14_wcypq")
+text = "Tanku so mucho for yu helpo! Ita not mucho, buto hera a rewardo!"
+npc_info = ExtResource("8_khh2a")
+
+[node name="QuestAdvanceTrigger" parent="NPC_NERO2/QuestActivatedSwitch3/QuestActivatedSwitch2/QuestActivatedSwitch/DialogInteraction2" instance=ExtResource("18_d4gbo")]
+signal_name = "finished"
+linked_quest = ExtResource("12_8f53j")
+quest_complete = true
+settings_summary = "UPDATE QUEST:
+Quest: Help Pero
+Step: 0 - N/A
+Complete: true"
+
+[node name="Node" type="Node" parent="NPC_NERO2/QuestActivatedSwitch3/QuestActivatedSwitch2/QuestActivatedSwitch/DialogInteraction2/QuestAdvanceTrigger"]
+script = SubResource("GDScript_o512p")

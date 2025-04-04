@@ -78,7 +78,10 @@ func show_dialog( _items : Array[ DialogItem ] ) -> void:
 	dialog_item_index = 0
 	get_tree().paused = true
 	await get_tree().process_frame
-	start_dialog()
+	if dialog_items.size() == 0:
+		hide_dialog()
+	else:	
+		start_dialog()
 	pass
 
 
@@ -152,6 +155,7 @@ func set_dialog_choice( _d : DialogChoice ) -> void:
 
 func _dialog_choice_selected( _d : DialogBranch ) -> void:
 	choice_options.visible = false
+	_d.selected.emit()
 	show_dialog( _d.dialog_items )
 	pass
 

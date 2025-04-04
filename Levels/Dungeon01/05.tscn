@@ -1,0 +1,67 @@
+[gd_scene load_steps=12 format=4 uid="uid://dmmbvqo4nc04b"]
+
+[ext_resource type="Script" uid="uid://d2eyblbal755o" path="res://Levels/scripts/level.gd" id="1_yt2u4"]
+[ext_resource type="AudioStream" uid="uid://bss1hbkoufxql" path="res://Levels/music/example_music_03.ogg" id="2_ak41u"]
+[ext_resource type="PackedScene" uid="uid://bcskysr5no5a6" path="res://Tile Maps/dungeon_tiles_01.tscn" id="3_b0ieq"]
+[ext_resource type="PackedScene" uid="uid://dr4blo7ya448q" path="res://Levels/player_spawn.tscn" id="4_68ytp"]
+[ext_resource type="PackedScene" uid="uid://cwby8egx8vwx2" path="res://quests/utility_nodes/quest_activated_switch.tscn" id="6_ilas6"]
+[ext_resource type="PackedScene" uid="uid://vlpiuopcomwi" path="res://Levels/level_transition.tscn" id="6_rdbhs"]
+[ext_resource type="Resource" uid="uid://dy2ovaiv236mv" path="res://quests/help_farmer.tres" id="7_rdbhs"]
+[ext_resource type="PackedScene" uid="uid://b523kljtfiar7" path="res://quests/utility_nodes/quest_advance_trigger.tscn" id="8_8rcs1"]
+[ext_resource type="PackedScene" uid="uid://ch2oxh3rsa2fr" path="res://Interactables/dungeon/pressure_plate.tscn" id="9_kxjsd"]
+[ext_resource type="PackedScene" uid="uid://da4qq8gb0idce" path="res://Interactables/dungeon/barred_door.tscn" id="10_mtfxm"]
+[ext_resource type="PackedScene" uid="uid://b4jqibhvnwmda" path="res://Interactables/dungeon/pushable_statue.tscn" id="11_t3671"]
+
+[node name="01" type="Node2D"]
+script = ExtResource("1_yt2u4")
+music = ExtResource("2_ak41u")
+
+[node name="Dungeon Tiles 01" parent="." instance=ExtResource("3_b0ieq")]
+tile_map_data = PackedByteArray("AAAAAP//AQAJAAAAAAAAAAAAAQAJAAEAAAAAAAEAAQAJAAIAAAAAAAIAAQAJAAMAAAAAAAMAAQAJAAMAAAAAAAQAAQAJAAMAAAAAAAUAAQAJAAMAAAAAAAYAAQAJAAQAAAAAAAcAAQAJAAUAAAAAAAgAAQAJAAYAAAABAP//AQAKAAAAAAABAAAAAQAKAAEAAAABAAEAAQAKAAIAAAABAAIAAQAKAAMAAAABAAMAAQAKAAMAAAABAAQAAQAKAAMAAAABAAUAAQAKAAMAAAABAAYAAQAKAAQAAAABAAcAAQAKAAUAAAABAAgAAQAKAAYAAAACAP//AQALAAAAAAACAAAAAQALAAEAAAACAAEAAQALAAIAAAACAAIAAQALAAMAAAACAAMAAQALAAMAAAACAAQAAQALAAMAAAACAAUAAQALAAMAAAACAAYAAQALAAQAAAACAAcAAQALAAUAAAACAAgAAQALAAYAAAADAP//AQAMAAAAAAADAAAAAQAMAAEAAAADAAEAAQAMAAIAAAADAAIAAQABAAIAAAADAAMAAQADAAAAAAADAAQAAQACAAIAAAADAAUAAQABAAQAAAADAAYAAQAMAAQAAAADAAcAAQAMAAUAAAADAAgAAQAMAAYAAAAEAP//AQAEAAUAAAAEAAAAAQAEAAYAAAAEAAEAAQAEAAcAAAAEAAIAAQABAAAAAAAEAAMAAQAAAAEAAAAEAAQAAQABAAMAAAAEAAUAAQADAAEAAAAEAAYAAQAAAAUAAAAEAAcAAQAAAAYAAAAEAAgAAQAAAAcAAAAFAP//AQAHAAUAAAAFAAAAAQAHAAYAAAAFAAEAAQAHAAcAAAAFAAIAAQAAAAEAAAAFAAMAAQACAAEAAAAFAAQAAQAAAAAAAAAFAAUAAQAAAAEAAAAFAAYAAQADAAUAAAAFAAcAAQADAAYAAAAFAAgAAQADAAcAAAAGAP//AQAEAAUAAAAGAAAAAQAEAAYAAAAGAAEAAQAEAAcAAAAGAAIAAQAAAAEAAAAGAAMAAQACAAAAAAAGAAQAAQADAAIAAAAGAAUAAQACAAEAAAAGAAYAAQAAAAUAAAAGAAcAAQAAAAYAAAAGAAgAAQAAAAcAAAAHAP//AQAFAAUAAAAHAAAAAQAFAAYAAAAHAAEAAQAFAAcAAAAHAAIAAQAAAAEAAAAHAAMAAQABAAMAAAAHAAQAAQADAAEAAAAHAAUAAQABAAQAAAAHAAYAAQABAAUAAAAHAAcAAQABAAYAAAAHAAgAAQABAAcAAAAIAP//AQAGAAUAAAAIAAAAAQAGAAYAAAAIAAEAAQAGAAcAAAAIAAIAAQABAAAAAAAIAAMAAQABAAQAAAAIAAQAAQABAAMAAAAIAAUAAQAAAAEAAAAIAAYAAQACAAUAAAAIAAcAAQACAAYAAAAIAAgAAQACAAcAAAAJAP//AQAHAAUAAAAJAAAAAQAHAAYAAAAJAAEAAQAHAAcAAAAJAAIAAQADAAIAAAAJAAMAAQABAAMAAAAJAAQAAQABAAEAAAAJAAUAAQADAAEAAAAJAAYAAQADAAUAAAAJAAcAAQADAAYAAAAJAAgAAQADAAcAAAAKAP//AQAEAAUAAAAKAAAAAQAEAAYAAAAKAAEAAQAEAAcAAAAKAAIAAQABAAAAAAAKAAMAAQAAAAAAAAAKAAQAAQACAAIAAAAKAAUAAQACAAEAAAAKAAYAAQAAAAUAAAAKAAcAAQAAAAYAAAAKAAgAAQAAAAcAAAALAP//AQAHAAUAAAALAAAAAQAHAAYAAAALAAEAAQAHAAcAAAALAAIAAQADAAIAAAALAAMAAQACAAAAAAALAAQAAQABAAEAAAALAAUAAQABAAEAAAALAAYAAQADAAUAAAALAAcAAQADAAYAAAALAAgAAQADAAcAAAAMAP//AQAMAAAAAAAMAAAAAQAMAAEAAAAMAAEAAQAMAAIAAAAMAAIAAQADAAAAAAAMAAMAAQABAAMAAAAMAAQAAQADAAEAAAAMAAUAAQAAAAAAAAAMAAYAAQAMAAQAAAAMAAcAAQAMAAUAAAAMAAgAAQAMAAYAAAANAP//AQANAAAAAAANAAAAAQANAAEAAAANAAEAAQANAAIAAAANAAIAAQANAAMAAAANAAMAAQANAAMAAAANAAQAAQANAAMAAAANAAUAAQANAAMAAAANAAYAAQANAAQAAAANAAgAAQANAAYAAAAOAP//AQAOAAAAAAAOAAAAAQAOAAEAAAAOAAEAAQAOAAIAAAAOAAIAAQAOAAMAAAAOAAMAAQAOAAMAAAAOAAQAAQAOAAMAAAAOAAUAAQAOAAMAAAAOAAYAAQAOAAQAAAAOAAcAAQAOAAUAAAAOAAgAAQAOAAYAAAAPAP//AQAPAAAAAAAPAAAAAQAPAAEAAAAPAAEAAQAPAAIAAAAPAAIAAQAPAAMAAAAPAAMAAQAPAAMAAAAPAAQAAQAPAAMAAAAPAAUAAQAPAAMAAAAPAAYAAQAPAAQAAAAPAAcAAQAPAAUAAAAPAAgAAQAPAAYAAAANAAcAAQANAAUAAAA=")
+
+[node name="PlayerSpawn" parent="." instance=ExtResource("4_68ytp")]
+position = Vector2(256, 173)
+
+[node name="LevelTransition" parent="." instance=ExtResource("6_rdbhs")]
+position = Vector2(256, 205)
+level = "uid://daqdlsdj76no7"
+target_transition_area = "LevelTransition2"
+center_player = true
+side = 3
+
+[node name="QuestActivatedSwitch" parent="LevelTransition" instance=ExtResource("6_ilas6")]
+check_type = 1
+remove_when_activated = true
+free_on_remove = true
+react_to_global_signal = true
+linked_quest = ExtResource("7_rdbhs")
+settings_summary = "UPDATE QUEST:
+Quest: Help Pero
+Checking if player has completed step: N/A"
+
+[node name="QuestAdvanceTrigger" parent="LevelTransition/QuestActivatedSwitch" instance=ExtResource("8_8rcs1")]
+linked_quest = ExtResource("7_rdbhs")
+settings_summary = "UPDATE QUEST:
+Quest: Help Pero
+Step: 0 - N/A
+Complete: false"
+
+[node name="LevelTransition2" parent="." instance=ExtResource("6_rdbhs")]
+position = Vector2(256, 48)
+level = "uid://eo8dqbyvifal"
+side = 2
+
+[node name="PressurePlate" parent="." instance=ExtResource("9_kxjsd")]
+position = Vector2(192, 112)
+
+[node name="BarredDoor" parent="." instance=ExtResource("10_mtfxm")]
+position = Vector2(224, 55)
+
+[node name="PushableStatue" parent="." instance=ExtResource("11_t3671")]
+position = Vector2(320, 113)
+persistent = true
+persistent_location = Vector2(191, 114)
+
+[connection signal="entered_from_here" from="LevelTransition" to="LevelTransition/QuestActivatedSwitch/QuestAdvanceTrigger" method="advance_quest"]
+[connection signal="activated" from="PressurePlate" to="BarredDoor" method="open_door"]
+[connection signal="deactivated" from="PressurePlate" to="BarredDoor" method="close_door"]
